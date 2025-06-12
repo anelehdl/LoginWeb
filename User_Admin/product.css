@@ -1,0 +1,109 @@
+header {
+    position: sticky;
+    top: 0;
+    width: 100%;
+    background-color: #FAF9F6;
+    color: black;
+    padding: 10px 20px;
+    display: flex;
+    align-items: center;
+    box-sizing: border-box;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    border: none;
+    margin-right: 20px;
+}
+
+.logo img {
+    height: 80px;
+    max-width: 90px;
+}
+
+a:link {
+    font-family: Arial, sans-serif;
+    font-weight: bold;
+    color: rgb(50, 49, 49);
+    text-decoration: none;
+    margin: 0 15px;
+    padding: 5px 0;
+    align-items: center;
+}
+
+header a:hover {
+    color: #1e3c6b;
+}
+
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f5f5f5;
+
+    background-image: url("../Pictures/Login_SignupBG.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+
+main {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    background-color: white;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgb(50, 49, 49);
+}
+
+h1 {
+    font-size: 36px;
+    color: rgb(50, 49, 49);
+    text-align: center;
+    margin-bottom: 15px;
+    padding-top: 50px;
+}
+
+.subtitle {
+    text-align: center;
+    color: #444;
+    font-size: 18px;
+    margin-bottom: 50px;
+}
+
+hr {
+    border: none;
+    border-top: 1px solid #666;
+    margin: 30px;
+}
+
+.options-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+}
+
+.option-card {
+    padding: 20px;
+    border-radius: 5px;
+}
+
+.option-card h2 {
+    font-size: 18px;
+    color: #444;
+    margin-bottom: 4px;
+}
+
+.option-card p {
+    color: #666;
+    line-height: 1.6;
+}
+
+
+@media (max-width: 1024px) {
+    .options-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}

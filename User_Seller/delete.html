@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Remove Products</title>
+    <link rel="stylesheet" href="delete.css">
+    <script src="delete.js" defer></script>
+</head>
+
+<body>
+    <header>
+        <div class="logo">
+            <img src="../Pictures/LogoPic.png" alt="Logo">
+        </div>
+        <a href="../User_Seller/sellerDashboard.html">Home</a>
+        <a href="../User_Seller/sellerAccount.html">My Account</a>
+        <a href="../User_Seller/sellerHelp.html">Help</a>
+    </header>
+
+    <main>
+        <div class="container">
+            <h1>Delete Product</h1>
+
+            <div class="warning-box">
+                <h3>Warning</h3>
+                <p>This action cannot be undone. Please make sure you want to permanently delete this product.</p>
+            </div>
+
+            <form id="deleteForm">
+                <div class="form-group">
+                    <label for="productId">Product ID:</label>
+                    <input type="text" id="productId" name="productId" placeholder="Enter product ID (e.g., 1)"
+                        required>
+                </div>
+
+                <div id="productInfo" class="products-grid" style="margin-top: 20px;"></div>
+
+                <div class="button-group">
+                    <button type="button" class="cancel-btn" onclick="clearForm()">Cancel</button>
+                    <button type="submit" class="delete-btn" id="deleteBtn">Delete Product</button>
+                </div>
+            </form>
+
+            <div id="message" class="message"></div>
+        </div>
+    </main>
+
+</body>
+
+</html>

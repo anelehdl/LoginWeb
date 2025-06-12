@@ -1,0 +1,196 @@
+/* Reset and body styles remain the same */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-image: url("../Pictures/Login_SignupBG.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    min-height: 100vh;
+    /* Remove padding from body since header is now fixed */
+}
+
+/* Fixed header positioning */
+header {
+    position: fixed;
+    /* Changed from sticky to fixed */
+    top: 0;
+    left: 0;
+    /* Add left positioning */
+    right: 0;
+    /* Add right positioning */
+    width: 100%;
+    background-color: #FAF9F6;
+    color: black;
+    padding: 10px 20px;
+    display: flex;
+    align-items: center;
+    box-sizing: border-box;
+    z-index: 1000;
+    /* Ensure header stays on top */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    /* Add subtle shadow */
+}
+
+.logo {
+    margin-right: 20px;
+}
+
+.logo img {
+    height: 80px;
+    max-width: 90px;
+}
+
+header a {
+    font-weight: bold;
+    color: rgb(50, 49, 49);
+    text-decoration: none;
+    margin: 0 15px;
+    padding: 5px 0;
+}
+
+header a:hover {
+    color: #1e3c6b;
+}
+
+/* Add margin-top to body content to account for fixed header */
+.container {
+    max-width: 900px;
+    margin: 0 auto;
+    margin-top: 120px;
+    /* Adjust based on your header height */
+    padding: 20px;
+    /* Move padding here from body */
+}
+
+/* Rest of your styles remain the same */
+.form-card {
+    background-color: rgba(255, 255, 255, 0.95);
+    border-radius: 15px;
+    padding: 40px;
+    margin-bottom: 20px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+}
+
+.form-card h2 {
+    font-size: 28px;
+    color: rgb(50, 49, 49);
+    margin-bottom: 30px;
+    font-weight: bold;
+}
+
+.form-card h3 {
+    font-size: 20px;
+    color: rgb(50, 49, 49);
+    margin-bottom: 20px;
+    font-weight: bold;
+}
+
+.form-row {
+    margin-bottom: 25px;
+}
+
+.form-row label {
+    display: block;
+    font-weight: bold;
+    color: rgb(50, 49, 49);
+    margin-bottom: 8px;
+    font-size: 16px;
+}
+
+.form-row input,
+.form-row textarea,
+.form-row select {
+    width: 100%;
+    padding: 15px;
+    border: 2px solid #e0e0e0;
+    border-radius: 8px;
+    font-size: 16px;
+    background-color: white;
+    transition: border-color 0.3s ease;
+}
+
+.form-row input:focus,
+.form-row textarea:focus,
+.form-row select:focus {
+    outline: none;
+    border-color: #4a90e2;
+}
+
+.form-row textarea {
+    min-height: 100px;
+    resize: vertical;
+    font-family: Arial, sans-serif;
+}
+
+.form-row select {
+    cursor: pointer;
+}
+
+.add-product-btn {
+    background-color: #2c5aa0;
+    color: white;
+    border: none;
+    padding: 18px 40px;
+    border-radius: 8px;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    width: 100%;
+    transition: background-color 0.3s ease;
+}
+
+.add-product-btn:hover {
+    background-color: #1e3c6b;
+}
+
+.file-upload-area {
+    border: 2px dashed #4a90e2;
+    border-radius: 8px;
+    padding: 30px;
+    text-align: center;
+    background-color: #f8f9fa;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.file-upload-area:hover {
+    border-color: #2c5aa0;
+    background-color: #e8f0fe;
+}
+
+.file-upload-area input[type="file"] {
+    display: none;
+}
+
+.file-upload-text {
+    color: #666;
+    font-size: 14px;
+}
+
+.choose-file-btn {
+    display: inline-block;
+    background-color: #f0f0f0;
+    border: 1px solid #ccc;
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-bottom: 5px;
+}
+
+.image-preview {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.image-preview img {
+    max-width: 100%;
+    max-height: 200px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}

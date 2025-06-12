@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="sellerDashboard.css">
+    <script src="../Login/login.js" defer></script>
+    <script src="../SignUp/signup.js" defer></script>
+    <script src="../User_Seller/seller.js" defer></script>
+</head>
+
+<body>
+    <header>
+        <div class="logo">
+            <img src="../Pictures/LogoPic.png" alt="Logo">
+        </div>
+
+        <a href="../User_Seller/sellerDashboard.html">Home</a>
+        <a href="../User_Seller/sellerAccount.html">My Account</a>
+        <a href="../User_Seller/sellerHelp.html">Help</a>
+
+        <div class="headerB">
+            <button id="headerLBtn">Login</button>
+            <button id="headerSBtn">Sign up</button>
+        </div>
+    </header>
+
+    <main>
+        <div class="container">
+
+            <div id="successMessage" style="display: none;"></div>
+
+            <div class="dash-header">
+                <h1>Seller Dashboard</h1>
+                <p>Welcome to the seller personal dashboard</p>
+            </div>
+
+            <div class="dash-cards">
+                <div class="card">
+                    <div class="card-icon">
+                        <img src="../Pictures/dash1.png" alt="Icon">
+                    </div>
+                    <div class="card-title">
+                        Add Products
+                    </div>
+                    <div class="card-desc">
+                        Add your products to this online store in only a few clicks. Ensure that you upload high-quality
+                        images, set your price, and share the necessary details of your product.
+                    </div>
+                    <a href="../User_Seller/addProd.html" class="card-action">Add</a>
+                </div>
+
+
+                <div class="card">
+                    <div class="card-icon">
+                        <img src="../Pictures/dash2.png" alt="Icon">
+                    </div>
+                    <div class="card-title">
+                        View Transactions
+                    </div>
+                    <div class="card-desc">
+                        View a detailed history of all transactions that are associated with your account, including
+                        purchases, payments, refunds, or the reviews left on your products.
+                    </div>
+                    <a href="#" class="card-action">View</a>
+                </div>
+
+
+                <div class="card">
+                    <div class="card-icon">
+                        <img src="../Pictures/dash3.png" alt="Icon">
+                    </div>
+                    <div class="card-title">
+                        Manage Orders
+                    </div>
+                    <div class="card-desc">
+                        Manage the products listed on your acccount. You can view items out for shipment, remove or edit
+                        listings, and add new products.
+                    </div>
+                    <a href="../User_Seller/manageProd.html" class="card-action">Manage</a>
+                </div>
+            </div>
+        </div>
+    </main>
+</body>
+
+</html>

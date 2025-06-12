@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Product</title>
+    <link rel="stylesheet" href="add.css">
+    <script src="../User_Seller/add.js" defer></script>
+</head>
+
+<body>
+    <header>
+        <div class="logo">
+            <img src="../Pictures/LogoPic.png" alt="Logo">
+        </div>
+        <a href="../User_Seller/sellerDashboard.html">Home</a>
+        <a href="../User_Seller/sellerAccount.html">My Account</a>
+        <a href="../User_Seller/sellerHelp.html">Help</a>
+    </header>
+
+    <div class="container">
+        <div class="form-card">
+            <h2>Add Products</h2>
+
+            <form action="addProd.php" method="post" enctype="multipart/form-data" id="productForm">
+                <div class="form-row">
+                    <label for="prodName">Product Name</label>
+                    <input type="text" name="prodName" id="prodName" required>
+                </div>
+
+                <div class="form-row">
+                    <label for="prodDesc">Product Description</label>
+                    <textarea name="prodDesc" id="prodDesc" required></textarea>
+                </div>
+
+                <div class="form-row">
+                    <label for="category">Product Type</label>
+                    <select name="category" id="category" required>
+                        <option value="">Select Category</option>
+                        <option value="Home">Home</option>
+                        <option value="Beauty & Fashion">Beauty & Fashion</option>
+                        <option value="Babies">Babies</option>
+                        <option value="Sports & Leisure">Sports & Leisure</option>
+                        <option value="Pets">Pets</option>
+                        <option value="Other">Other</option>
+                    </select>
+                </div>
+
+                <div class="form-row">
+                    <label for="price">Price</label>
+                    <input type="number" name="price" id="price" step="0.01" min="0" required>
+                </div>
+
+                <div class="form-row">
+                    <label for="stock">Stock</label>
+                    <input type="number" name="stock" id="stock" min="0" required>
+                </div>
+
+                <div class="form-row">
+                    <button type="submit" class="add-product-btn">Add Product</button>
+                </div>
+            </form>
+        </div>
+
+        <div class="form-card">
+            <h3>Product Image</h3>
+
+            <div class="form-row">
+                <label for="prodImg">Add Image</label>
+                <div class="file-upload-area" onclick="document.getElementById('prodImg').click()">
+                    <input type="file" name="prodImg" id="prodImg" accept="image/*" form="productForm"
+                        onchange="handleFileSelect(this)">
+                    <div class="choose-file-btn">Choose File</div>
+                    <div class="file-upload-text" id="fileText">No file chosen</div>
+                </div>
+                <div class="image-preview" id="imagePreview"></div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

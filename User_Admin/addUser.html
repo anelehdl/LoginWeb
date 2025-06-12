@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add User</title>
+    <link rel="stylesheet" href="users.css">
+</head>
+
+<body>
+    <header>
+        <div class="logo">
+            <img src="../Pictures/LogoPic.png" alt="Logo">
+        </div>
+
+        <a href="../User_Admin/userManage.html">User Management</a>
+        <a href="../User_Admin/productManage.html">Product Management</a>
+        <a href="../User_Admin/transactionManage.html">Transaction Management</a>
+    </header>
+
+    <div class="dash-header">
+        <h1>Add New User</h1>
+    </div>
+
+    <main>
+        <div class="container">
+            <form action="addUser.php" method="post" enctype="multipart/form-data" id="addForm">
+                <div class="txt">
+                    <div class="form-group">
+                        <label for="username">Username</label>
+                        <input type="text" name="userName" id="userName">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="text" name="email" id="email">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="firstName">First Name</label>
+                        <input type="text" name="firstName" id="firstName">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="lastName">Last Name</label>
+                        <input type="text" name="lastName" id="lastName">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <input type="password" name="pswd" id="pswd">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="userRole">User Role</label>
+                        <select name="userRole" id="userRole">
+                            <option value="buyer">Buyer</option>
+                            <option value="seller">Seller</option>
+                            <option value="admin">Admin</option>
+                        </select>
+                    </div>
+
+                    <input type="submit" value="Add New User">
+
+                </div>
+            </form>
+        </div>
+    </main>
+</body>
+
+</html>
