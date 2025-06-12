@@ -12,7 +12,7 @@ $servername = "localhost";
 $username = "root";
 $password = 'Ad1$QL';
 $dbname = "marketplace";
-$port = 3006;
+$port = 3306;
 
 // Create connection
 $conn = new mysqli($servername, $username, $password, $dbname, $port);
@@ -83,7 +83,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                         VALUES (?, ?, ?, ?, ?, ?, NOW())";
 
                 $stmt = $conn->prepare($sql);
-                $stmt->bind_param("issdii", $userID, $prodName, $prodDesc, $price, $category, $stock);
+                $stmt->bind_param("issdsi", $userID, $prodName, $prodDesc, $price, $category, $stock);
 
                 if ($stmt->execute()) {
                     $success = "Product added successfully!";

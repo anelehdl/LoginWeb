@@ -7,7 +7,7 @@ $servername = "localhost";
 $username = "root";
 $password = 'Ad1$QL';
 $dbname = "marketplace";
-$port = 3006;
+$port = 3306;
 
 
 ini_set('display_errors', 0);

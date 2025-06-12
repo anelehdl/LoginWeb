@@ -11,7 +11,7 @@ $servername = "localhost";
 $username = "root";
 $password = 'Ad1$QL';
 $dbname = "marketplace";
-$port = 3006;
+$port = 3306;
 
 try {
     // Create connection

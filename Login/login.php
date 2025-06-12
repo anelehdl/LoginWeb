@@ -5,7 +5,7 @@ $servername = "localhost";
 $username = "root";
 $password = 'Ad1$QL';
 $dbname = "marketplace";
-$port = 3006;
+$port = 3306;
 
 $conn = new mysqli($servername, $username, $password, $dbname, $port);
 
@@ -32,13 +32,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         if ($result->num_rows == 1) {
             $user = $result->fetch_assoc();
 
-            // Verify password (assuming passwords are hashed with password_hash())
-            if ($userPassword === $user['userPassword']) {
+            // Verify password using password_verify() for hashed passwords
+            if (password_verify($userPassword, $user['userPassword'])) {
                 // Login successful - UPDATED SESSION VARIABLE NAMES
                 $_SESSION['userID'] = $user['userId'];        // Changed from 'user_id' to 'userID'
                 $_SESSION['userName'] = $user['userName'];     // Changed from 'user_name' to 'userName'  
                 $_SESSION['userRole'] = $user['userRole'];     // Changed from 'user_role' to 'userRole'
                 $_SESSION['logged_in'] = true;
+
+                // Regenerate session ID for security
+                session_regenerate_id(true);
 
                 switch ($user['userRole']) {
                     case 'admin':

@@ -1,6 +1,3 @@
-// Seller Dashboard JavaScript Functions
-
-// Wait for DOM to be fully loaded
 document.addEventListener('DOMContentLoaded', function() {
     
     // Handle success message display and auto-hide
@@ -28,7 +25,7 @@ document.addEventListener('DOMContentLoaded', function() {
         
         // Add close button
         const closeBtn = document.createElement('span');
-        closeBtn.innerHTML = '×';
+        closeBtn.innerHTML = 'x';
         closeBtn.style.cssText = 'position: absolute; top: 5px; right: 10px; font-size: 20px; cursor: pointer; color: #155724;';
         closeBtn.addEventListener('click', function(e) {
             e.stopPropagation();
