@@ -7,7 +7,7 @@
     <title>Sign Up Details</title>
     <link rel="stylesheet" href="signup.css">
     <script src="../Login/login.js" defer></script>
-    <script src="../Signup/signup.js" defer></script>
+    <script src="../SignUp/signup.js" defer></script>
 </head>
 
 <body>
@@ -15,11 +15,6 @@
         <div class="logo">
             <img src="../Pictures/LogoPic.png" alt="Logo">
         </div>
-
-        <a href="../Homepage/homepage.html">Home</a>
-        <a href="../Categories/categories.html">Categories</a>
-        <a href="../Account/account.html">My Account</a>
-        <a href="../Helppage/help.html">Help</a>
 
         <div class="headerB">
             <button id="headerLBtn">Login</button>
@@ -32,23 +27,49 @@
             <form id="detailsForm">
                 <div class="txt">
                     <h2>DETAILS</h2>
-                    <input type="text" name="phoneNum" id="phoneNum" placeholder="Phone Number">
 
-                    <input type="text" name="address" id="address" placeholder="Home Address">
+                    <div class="progress-container">
+                        <div class="progress-bar">
+                            <div class="progress-fill"></div>
+                        </div>
+                        <div class="progress-text">Step 2 of 2</div>
+                    </div>
+
+                    <div id="messageContainer"></div>
+
+                    <div class="input-container">
+                        <input type="text" name="phoneNum" id="phoneNum" placeholder=" " required>
+                        <label for="phoneNum">Phone Number</label>
+                        <span class="validation-icon" id="phoneIcon"></span>
+                    </div>
+
+                    <div class="input-container">
+                        <input type="text" name="address" id="address" placeholder=" " required>
+                        <label for="address">Home Address</label>
+                        <span class="validation-icon" id="addressIcon"></span>
+                    </div>
 
                     <p>What type of user would you like to be?</p>
 
-                    <div class="radio-option">
-                        <label><input type="radio" name="userRole" id="buyer" value="buyer" required>Buyer</label>
+                    <div class="radio-option" id="buyerOption">
+                        <label>
+                            <input type="radio" name="userRole" id="buyer" value="buyer" required>
+                            Buyer
+                        </label>
+                        <div class="role-description">Browse and purchase products from local sellers</div>
                     </div>
 
-                    <p>OR</p>
+                    <p class="or-text">OR</p>
 
-                    <div class="radio-option">
-                        <label><input type="radio" name="userRole" id="seller" value="seller">Seller</label>
+                    <div class="radio-option" id="sellerOption">
+                        <label>
+                            <input type="radio" name="userRole" id="seller" value="seller">
+                            Seller
+                        </label>
+                        <div class="role-description">Create your shop and sell products to the community</div>
                     </div>
 
-                    <input type="submit" value="Confirm">
+                    <input type="submit" value="Complete Registration" id="confirmBtn">
                 </div>
             </form>
         </div>

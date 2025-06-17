@@ -7,7 +7,7 @@
     <title>Sign Up Page</title>
     <link rel="stylesheet" href="signup.css">
     <script src="../Login/login.js" defer></script>
-    <script src="../Signup/signup.js" defer></script>
+    <script src="../SignUp/signup.js" defer></script>
 </head>
 
 <body>
@@ -24,17 +24,43 @@
 
     <main>
         <div class="bd">
-            <form id="loginForm">
+            <form id="signupForm">
                 <div class="txt">
                     <h2>SIGN UP</h2>
-                    <input type="text" name="userName" id="userName" placeholder="Username">
 
-                    <input type="text" name="email" id="email" placeholder="Email Address">
+                    <div class="progress-container">
+                        <div class="progress-bar">
+                            <div class="progress-fill"></div>
+                        </div>
+                        <div class="progress-text">Step 1 of 2</div>
+                    </div>
 
-                    <input type="password" name="pswd" id="pswd" placeholder="Password">
+                    <div id="messageContainer"></div>
 
-                    <input type="submit" value="Sign Up">
+                    <div class="input-container">
+                        <input type="text" name="userName" id="userName" placeholder=" " required>
+                        <label for="userName">Username</label>
+                        <span class="validation-icon" id="usernameIcon"></span>
+                    </div>
+
+                    <div id="messageContainer"></div>
+
+                    <div class="input-container">
+                        <input type="email" name="email" id="email" placeholder=" " required>
+                        <label for="email">Email Address</label>
+                        <span class="validation-icon" id="emailIcon"></span>
+                    </div>
+
+                    <div class="input-container">
+                        <input type="password" name="pswd" id="pswd" placeholder=" " required>
+                        <label for="pswd">Password</label>
+                        <span class="validation-icon" id="passwordIcon"></span>
+                    </div>
+
+                    <input type="submit" value="Continue" id="signupBtn">
+
                     <p>Already have an account?</p>
+
                     <input type="button" name="login" id="login" value="Login">
                 </div>
             </form>

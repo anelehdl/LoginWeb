@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
+    <script src="../User_Admin/admin.js" defer></script>
     <link rel="stylesheet" href="adminLogin.css">
 </head>
 
@@ -20,13 +21,10 @@
             <form action="adminLogin.php" method="post" enctype="multipart/form-data" id="loginForm">
                 <div class="txt">
                     <h2>LOGIN</h2>
-                    <input type="text" name="userName" id="userName" placeholder="Username">
-
-                    <input type="text" name="email" id="email" placeholder="Email">
-
-                    <input type="password" name="pswd" id="pswd" placeholder="Password">
-
-                    <input type="submit" value="Login">
+                    <input type="text" name="userName" id="userName" placeholder="Username" required>
+                    <input type="text" name="email" id="email" placeholder="Email" required>
+                    <input type="password" name="pswd" id="pswd" placeholder="Password" required>
+                    <input type="submit" value="LOGIN">
                 </div>
             </form>
         </div>

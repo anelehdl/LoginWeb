@@ -8,6 +8,9 @@ header {
     display: flex;
     align-items: center;
     box-sizing: border-box;
+    z-index: 1000;
+    box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(10px);
 }
 
 .logo {
@@ -19,6 +22,11 @@ header {
 .logo img {
     height: 80px;
     max-width: 90px;
+    transition: transform 0.3s ease;
+}
+
+.logo:hover img {
+    transform: scale(1.05);
 }
 
 a:link {
@@ -44,30 +52,36 @@ header a:hover {
     padding: 8px 15px;
     background-color: #1e3c6b;
     color: #FAF9F6;
-
     border: none;
     border-radius: 5px;
-
     font-family: Arial, sans-serif;
     font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
 }
 
 .headerB button:hover {
     opacity: 0.9;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(30, 60, 107, 0.3);
 }
 
+.headerB button.active {
+    background: linear-gradient(135deg, #1e3c6b, #2a4d7a);
+    box-shadow: 0 4px 15px rgba(30, 60, 107, 0.4);
+}
 
 body {
     background-image: url("../Pictures/Login_SignupBG.jpg");
     background-size: cover;
     background-repeat: no-repeat;
     background-attachment: fixed;
-
     margin: 0;
     padding: 0;
     min-height: 100vh;
     display: flex;
     flex-direction: column;
+    font-family: Arial, sans-serif;
 }
 
 main {
@@ -75,25 +89,64 @@ main {
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 20px 0px;
+    padding: 40px 20px;
     width: 100%;
 }
 
 .bd {
-    width: 350px;
-    height: 550px;
-    border-radius: 5px;
-    background-color: rgb(254, 251, 245);
-
+    width: 420px;
+    min-height: 600px;
+    border-radius: 20px;
+    background: rgba(254, 251, 245, 0.95);
+    backdrop-filter: blur(15px);
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
+    border: 1px solid rgba(255, 255, 255, 0.2);
     display: flex;
     justify-content: center;
     align-items: center;
+    position: relative;
+    overflow: hidden;
+    animation: fadeInUp 0.8s ease forwards;
+}
+
+body:has(#detailsForm) .bd {
+    width: 450px;
+    min-height: 650px;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.bd::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(30, 60, 107, 0.05), transparent);
+    animation: shimmer 3s ease-in-out infinite;
+}
+
+@keyframes shimmer {
+    0% { left: -100%; }
+    50% { left: 100%; }
+    100% { left: 100%; }
 }
 
 .txt {
     position: relative;
-    width: 80%;
+    width: 85%;
     text-align: center;
+    z-index: 2;
 }
 
 form {
@@ -104,95 +157,319 @@ form {
 
 h2 {
     font-family: Arial, sans-serif;
-    font-weight: bold;
-    margin-bottom: 50px;
-    margin-top: 0px;
-    color: rgb(50, 49, 49);
-}
-
-input {
-    display: block;
+    font-weight: 700;
+    font-size: 32px;
     margin-bottom: 40px;
-    margin-right: auto;
-    margin-left: auto;
-
-    padding: 5px;
-    width: 100%;
-
-    font-size: 14px;
-    border-color: #FAF9F6;
-    border-radius: 5px;
+    margin-top: 20px;
+    color: rgb(50, 49, 49);
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    background: linear-gradient(135deg, #1e3c6b, #2a4d7a);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    position: relative;
 }
 
-input[type="submit"] {
+h2::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 3px;
+    background: linear-gradient(90deg, #1e3c6b, #2a4d7a);
+    border-radius: 2px;
+}
+
+.progress-container {
+    margin-bottom: 30px;
+}
+
+.progress-bar {
     width: 100%;
-    height: 40px;
-    padding: 8px 10px;
-    margin-top: 50px;
-    background-color: #1e3c6b;
-    opacity: 0.9;
+    height: 4px;
+    background: rgba(30, 60, 107, 0.1);
+    border-radius: 2px;
+    overflow: hidden;
+}
 
+.progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #1e3c6b, #2a4d7a);
+    width: 50%;
+    border-radius: 2px;
+    transition: width 0.3s ease;
+}
+
+.progress-text {
+    text-align: center;
+    font-size: 12px;
+    color: #666;
+    margin-top: 5px;
+}
+
+.input-container {
+    position: relative;
+    margin-bottom: 25px;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"] {
+    display: block;
+    margin: 0 auto;
+    padding: 15px 20px;
+    width: 100%;
+    font-size: 16px;
+    border: 2px solid rgba(30, 60, 107, 0.1);
+    border-radius: 25px;
+    background: rgba(255, 255, 255, 0.9);
+    transition: all 0.3s ease;
+    box-sizing: border-box;
+    outline: none;
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="password"]:focus {
+    border-color: #1e3c6b;
+    background: white;
+    box-shadow: 0 0 0 3px rgba(30, 60, 107, 0.1);
+    transform: translateY(-2px);
+}
+
+.input-container label {
+    position: absolute;
+    left: 20px;
+    top: 15px;
+    color: #999;
+    transition: all 0.3s ease;
+    pointer-events: none;
+    font-size: 16px;
+}
+
+.input-container input:focus + label,
+.input-container input:not(:placeholder-shown) + label {
+    top: -10px;
+    left: 15px;
+    font-size: 12px;
+    color: #1e3c6b;
+    background: white;
+    padding: 0 5px;
+    font-weight: bold;
+}
+
+input.valid {
+    border-color: #28a745;
+}
+
+input.invalid {
+    border-color: #dc3545;
+}
+
+.validation-icon {
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 18px;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.validation-icon.show {
+    opacity: 1;
+}
+
+.validation-icon.valid {
+    color: #28a745;
+}
+
+.validation-icon.invalid {
+    color: #dc3545;
+}
+
+input[type="submit"],
+input[type="button"] {
+    width: 100%;
+    height: 50px;
+    padding: 12px 20px;
+    margin-top: 20px;
+    background: linear-gradient(135deg, #1e3c6b, #2a4d7a);
     border: none;
-    border-radius: 5px;
-
+    border-radius: 25px;
     font-family: Arial, sans-serif;
-    font-size: 14px;
+    font-size: 16px;
     font-weight: bold;
     color: #FAF9F6;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    box-shadow: 0 4px 15px rgba(30, 60, 107, 0.3);
 }
 
-input[type="submit"]:hover {
-    opacity: 1;
+input[type="submit"]::before,
+input[type="button"]::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    transition: all 0.3s ease;
+}
+
+input[type="submit"]:hover::before,
+input[type="button"]:hover::before {
+    width: 300px;
+    height: 300px;
+}
+
+input[type="submit"]:hover,
+input[type="button"]:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(30, 60, 107, 0.4);
 }
 
 p {
     font-family: Arial, sans-serif;
-    font-size: 14px;
+    font-size: 16px;
     color: rgb(101, 100, 100);
+    margin: 30px 0 10px 0;
+    position: relative;
+}
+
+p::before,
+p::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    width: 40px;
+    height: 1px;
+    background: rgba(101, 100, 100, 0.3);
+}
+
+p::before {
+    left: -50px;
+}
+
+p::after {
+    right: -50px;
 }
 
 input[type="button"] {
-    width: 100%;
-    height: 40px;
-    padding: 8px 10px;
-    margin-top: 10px;
-    background-color: #1e3c6b;
-    opacity: 0.9;
-
-    border: none;
-    border-radius: 5px;
-
-    font-family: Arial, sans-serif;
-    font-size: 14px;
-    font-weight: bold;
-    color: #FAF9F6;
+    background: transparent;
+    border: 2px solid #1e3c6b;
+    color: #1e3c6b;
+    margin-top: 15px;
 }
 
 input[type="button"]:hover {
-    opacity: 1;
-}
-
-label {
-    font-family: Arial, sans-serif;
-    font-size: 14px;
-    color: rgb(56, 56, 56);
+    background: linear-gradient(135deg, #1e3c6b, #2a4d7a);
+    color: white;
 }
 
 .radio-option {
     display: flex;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
-    margin-bottom: 15px;
+    margin-bottom: 20px;
+    padding: 15px 20px;
+    border: 2px solid rgba(30, 60, 107, 0.1);
+    border-radius: 15px;
+    background: rgba(255, 255, 255, 0.7);
+    transition: all 0.3s ease;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+}
+
+.radio-option::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(30, 60, 107, 0.05), transparent);
+    transition: left 0.5s ease;
+}
+
+.radio-option:hover::before {
+    left: 100%;
+}
+
+.radio-option:hover {
+    border-color: #1e3c6b;
+    background: rgba(255, 255, 255, 0.9);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(30, 60, 107, 0.1);
+}
+
+.radio-option.selected {
+    border-color: #1e3c6b;
+    background: rgba(30, 60, 107, 0.05);
+    box-shadow: 0 4px 15px rgba(30, 60, 107, 0.2);
+}
+
+.radio-option label {
+    font-family: Arial, sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+    color: rgb(50, 49, 49);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    margin: 0;
 }
 
 .radio-option input[type="radio"] {
-    width: auto;
-    margin: 0 8px 0 0;
-    display: inline-block;
+    width: 20px;
+    height: 20px;
+    margin: 0 15px 0 0;
+    accent-color: #1e3c6b;
+    cursor: pointer;
 }
 
-input[type="radio"] {
-    display: inline-block;
-    width: auto;
-    margin: 0 8px 0 0;
+.message {
+    padding: 10px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    text-align: center;
+    font-weight: bold;
+    opacity: 0;
+    transform: translateY(-10px);
+    transition: all 0.3s ease;
+}
+
+.message.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.message.error {
+    background: rgba(255, 0, 0, 0.1);
+    color: #dc3545;
+    border: 1px solid rgba(255, 0, 0, 0.2);
+}
+
+.message.success {
+    background: rgba(0, 255, 0, 0.1);
+    color: #28a745;
+    border: 1px solid rgba(0, 255, 0, 0.2);
+}
+
+@keyframes ripple {
+    to {
+        transform: scale(2);
+        opacity: 0;
+    }
 }

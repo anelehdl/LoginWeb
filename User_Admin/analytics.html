@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Analytics Dashboard</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f5f7fa;
+            color: #333;
+        }
+
+        .dashboard {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .header {
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 2rem;
+        }
+
+        .header h1 {
+            color: #667eea;
+            margin-bottom: 0.5rem;
+        }
+
+        .header p {
+            color: #666;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .stat-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #667eea;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            color: #666;
+            font-size: 1rem;
+        }
+
+        .charts-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .chart-container {
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .chart-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            color: #333;
+        }
+
+        .data-table {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        .table-header {
+            background: #667eea;
+            color: white;
+            padding: 1.5rem;
+            font-weight: 600;
+        }
+
+        .table-content {
+            padding: 1.5rem;
+            max-height: 400px;
+            overflow-y: auto;
+        }
+
+        .table-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr 1fr;
+            gap: 1rem;
+            padding: 0.75rem 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .table-row:last-child {
+            border-bottom: none;
+        }
+
+        .controls {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 2rem;
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .btn {
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .btn-primary {
+            background: #667eea;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #5a67d8;
+        }
+
+        .btn-secondary {
+            background: #e2e8f0;
+            color: #333;
+        }
+
+        .btn-secondary:hover {
+            background: #cbd5e0;
+        }
+
+        .btn-danger {
+            background: #ff4757;
+            color: white;
+        }
+
+        .btn-danger:hover {
+            background: #ff3742;
+        }
+
+        @media (max-width: 768px) {
+            .charts-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .table-row {
+                grid-template-columns: 1fr;
+                gap: 0.5rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="dashboard">
+        <div class="header">
+            <h1>Local Market Analytics</h1>
+            <p>Website traffic and user behavior insights</p>
+        </div>
+
+        <div class="controls">
+            <button class="btn btn-primary" onclick="refreshData()">Refresh Data</button>
+            <button class="btn btn-secondary" onclick="exportData()">Export Data</button>
+            <button class="btn btn-danger" onclick="clearAllData()">Clear All Data</button>
+        </div>
+
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-number" id="totalPageViews">0</div>
+                <div class="stat-label">Total Page Views</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number" id="uniqueVisitors">0</div>
+                <div class="stat-label">Unique Visitors</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number" id="totalSessions">0</div>
+                <div class="stat-label">Total Sessions</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number" id="avgTimeOnPage">0s</div>
+                <div class="stat-label">Avg. Time on Page</div>
+            </div>
+        </div>
+
+        <div class="charts-grid">
+            <div class="chart-container">
+                <div class="chart-title">Daily Page Views</div>
+                <canvas id="pageViewsChart"></canvas>
+            </div>
+            <div class="chart-container">
+                <div class="chart-title">Top Pages</div>
+                <canvas id="topPagesChart"></canvas>
+            </div>
+        </div>
+
+        <div class="data-table">
+            <div class="table-header">Recent Page Views</div>
+            <div class="table-content">
+                <div class="table-row" style="font-weight: 600; background: #f8f9fa;">
+                    <div>Page</div>
+                    <div>Time</div>
+                    <div>Session ID</div>
+                    <div>Referrer</div>
+                </div>
+                <div id="recentViews"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        class AnalyticsDashboard {
+            constructor() {
+                this.charts = {};
+                this.init();
+            }
+
+            init() {
+                this.loadData();
+                this.createCharts();
+
+                setInterval(() => this.loadData(), 30000);
+            }
+
+            loadData() {
+                const data = this.getAnalyticsData();
+                this.updateStats(data);
+                this.updateCharts(data);
+                this.updateRecentViews(data.pageViews);
+            }
+
+            getAnalyticsData() {
+                return {
+                    pageViews: JSON.parse(localStorage.getItem('analytics_pageViews')) || [],
+                    clicks: JSON.parse(localStorage.getItem('analytics_clicks')) || [],
+                    timeOnPage: JSON.parse(localStorage.getItem('analytics_timeOnPage')) || [],
+                    scrollDepth: JSON.parse(localStorage.getItem('analytics_scrollDepth')) || [],
+                    customEvents: JSON.parse(localStorage.getItem('analytics_customEvents')) || [],
+                    dailyStats: JSON.parse(localStorage.getItem('analytics_daily')) || {}
+                };
+            }
+
+            updateStats(data) {
+                document.getElementById('totalPageViews').textContent = data.pageViews.length;
+
+                const uniqueVisitors = new Set(data.pageViews.map(view => view.sessionId.split('_')[1]));
+                document.getElementById('uniqueVisitors').textContent = uniqueVisitors.size;
+
+                const uniqueSessions = new Set(data.pageViews.map(view => view.sessionId));
+                document.getElementById('totalSessions').textContent = uniqueSessions.size;
+
+                if (data.timeOnPage.length > 0) {
+                    const avgTime = data.timeOnPage.reduce((sum, item) => sum + item.timeSpent, 0) / data.timeOnPage.length;
+                    document.getElementById('avgTimeOnPage').textContent = Math.round(avgTime / 1000) + 's';
+                }
+            }
+
+            createCharts() {
+                const pageViewsCtx = document.getElementById('pageViewsChart').getContext('2d');
+                this.charts.pageViews = new Chart(pageViewsCtx, {
+                    type: 'line',
+                    data: {
+                        labels: [],
+                        datasets: [{
+                            label: 'Page Views',
+                            data: [],
+                            borderColor: '#667eea',
+                            backgroundColor: 'rgba(102, 126, 234, 0.1)',
+                            tension: 0.4
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        scales: {
+                            y: {
+                                beginAtZero: true
+                            }
+                        }
+                    }
+                });
+
+                const topPagesCtx = document.getElementById('topPagesChart').getContext('2d');
+                this.charts.topPages = new Chart(topPagesCtx, {
+                    type: 'doughnut',
+                    data: {
+                        labels: [],
+                        datasets: [{
+                            data: [],
+                            backgroundColor: [
+                                '#667eea',
+                                '#764ba2',
+                                '#f093fb',
+                                '#f5576c',
+                                '#4facfe',
+                                '#43e97b'
+                            ]
+                        }]
+                    },
+                    options: {
+                        responsive: true
+                    }
+                });
+            }
+
+            updateCharts(data) {
+                const dailyData = {};
+                data.pageViews.forEach(view => {
+                    const date = new Date(view.timestamp).toDateString();
+                    dailyData[date] = (dailyData[date] || 0) + 1;
+                });
+
+                const sortedDates = Object.keys(dailyData).sort();
+                this.charts.pageViews.data.labels = sortedDates.map(date => new Date(date).toLocaleDateString());
+                this.charts.pageViews.data.datasets[0].data = sortedDates.map(date => dailyData[date]);
+                this.charts.pageViews.update();
+
+                const pageData = {};
+                data.pageViews.forEach(view => {
+                    const page = view.page || 'Unknown';
+                    pageData[page] = (pageData[page] || 0) + 1;
+                });
+
+                const sortedPages = Object.entries(pageData)
+                    .sort(([, a], [, b]) => b - a)
+                    .slice(0, 6);
+
+                this.charts.topPages.data.labels = sortedPages.map(([page]) => page);
+                this.charts.topPages.data.datasets[0].data = sortedPages.map(([, count]) => count);
+                this.charts.topPages.update();
+            }
+
+            updateRecentViews(pageViews) {
+                const recentViewsContainer = document.getElementById('recentViews');
+                const recent = pageViews.slice(-20).reverse();
+
+                recentViewsContainer.innerHTML = recent.map(view => `
+                    <div class="table-row">
+                        <div>${view.page || 'Unknown'}</div>
+                        <div>${new Date(view.timestamp).toLocaleTimeString()}</div>
+                        <div>${view.sessionId.slice(-8)}</div>
+                        <div>${view.referrer || 'Direct'}</div>
+                    </div>
+                `).join('');
+            }
+        }
+
+        const dashboard = new AnalyticsDashboard();
+
+        function refreshData() {
+            dashboard.loadData();
+        }
+
+        function exportData() {
+            const data = dashboard.getAnalyticsData();
+            const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `analytics-${new Date().toISOString().split('T')[0]}.json`;
+            a.click();
+            URL.revokeObjectURL(url);
+        }
+
+        function clearAllData() {
+            if (confirm('Are you sure you want to clear all analytics data? This cannot be undone.')) {
+                const keys = Object.keys(localStorage).filter(key => key.startsWith('analytics_'));
+                keys.forEach(key => localStorage.removeItem(key));
+                dashboard.loadData();
+                alert('All analytics data has been cleared.');
+            }
+        }
+    </script>
+</body>
+
+</html>

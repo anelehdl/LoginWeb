@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', function () {
-    // Get DOM elements
+
     const searchBtn = document.getElementById('searchBtn');
     const showBtn = document.getElementById('showBtn');
     const searchInput = document.getElementById('searchID');
@@ -9,7 +9,6 @@ document.addEventListener('DOMContentLoaded', function () {
     const updateForm = document.getElementById('updateForm');
     const alertContainer = document.getElementById('alertContainer');
 
-    // Event listeners
     searchBtn.addEventListener('click', handleSearch);
     showBtn.addEventListener('click', showAllProducts);
     closeModal.addEventListener('click', closeUpdateModal);
@@ -20,14 +19,12 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     });
 
-    // Close modal when clicking outside
     window.addEventListener('click', function (e) {
         if (e.target === modal) {
             closeUpdateModal();
         }
     });
 
-    // Load all products on page load
     showAllProducts();
 
     function handleSearch() {
@@ -54,7 +51,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 if (data.error) {
                     throw new Error(data.error);
                 }
-                displayProducts(data.products);
+                displayProducts(data.Products);
             })
             .catch(error => {
                 console.error('Error:', error);
@@ -118,7 +115,6 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     function openUpdateModal(productID, name, description, price, category, stock) {
-        // Populate form fields
         document.getElementById('productID').value = productID;
         document.getElementById('productName').value = name;
         document.getElementById('productDescription').value = description;
@@ -126,7 +122,6 @@ document.addEventListener('DOMContentLoaded', function () {
         document.getElementById('category').value = category;
         document.getElementById('stock').value = stock;
 
-        // Show modal
         modal.style.display = 'block';
         document.body.style.overflow = 'hidden';
     }
@@ -143,16 +138,13 @@ document.addEventListener('DOMContentLoaded', function () {
         const formData = new FormData(updateForm);
         const data = Object.fromEntries(formData.entries());
 
-        // Add hidden productID
         data.productID = document.getElementById('productID').value;
 
-        // Validate required fields
         if (!data.productName || !data.price || !data.category || data.stock === '') {
             showAlert('Please fill in all required fields', 'error');
             return;
         }
 
-        // Show loading state
         const submitBtn = updateForm.querySelector('button[type="submit"]');
         const originalText = submitBtn.textContent;
         submitBtn.textContent = 'Updating...';
@@ -170,7 +162,6 @@ document.addEventListener('DOMContentLoaded', function () {
                 if (result.success) {
                     showAlert('Product updated successfully!', 'success');
                     closeUpdateModal();
-                    // Refresh the product list
                     const currentSearch = searchInput.value.trim();
                     if (currentSearch) {
                         loadProducts(currentSearch);
@@ -199,7 +190,6 @@ document.addEventListener('DOMContentLoaded', function () {
         alertContainer.innerHTML = '';
         alertContainer.appendChild(alertDiv);
 
-        // Auto-hide after 5 seconds
         setTimeout(() => {
             alertDiv.remove();
         }, 5000);
@@ -223,6 +213,5 @@ document.addEventListener('DOMContentLoaded', function () {
         return div.innerHTML;
     }
 
-    // Make openUpdateModal globally accessible
     window.openUpdateModal = openUpdateModal;
 });

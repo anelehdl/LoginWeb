@@ -1,10 +1,12 @@
 <?php
-session_start();
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
 
-$servername = "localhost";
-$username = "root";
-$password = 'Ad1$QL';
-$dbname = "marketplace";
+session_start();
+$servername = "sql211.infinityfree.com";
+$username = "if0_39214006";
+$password = 'Aneleh001';
+$dbname = "if0_39214006_marketplace";
 $port = 3306;
 
 $conn = new mysqli($servername, $username, $password, $dbname, $port);
@@ -13,81 +15,84 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-if($_SERVER["REQUEST_METHOD"] == "POST") {
-    $userName = trim($_POST["userName"]);
-    $email = trim($_POST["email"]);
-    $firstName = trim($_POST["firstName"]);
-    $lastName = trim($_POST["lastName"]);
-    $password = trim($_POST["pswd"]);
-    $userRole = trim($_POST["userRole"]);
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $userName = isset($_POST["userName"]) ? trim($_POST["userName"]) : '';
+    $email = isset($_POST["email"]) ? trim($_POST["email"]) : '';
+    $phone = isset($_POST["phone"]) ? trim($_POST["phone"]) : '';
+    $address = isset($_POST["address"]) ? trim($_POST["address"]) : '';
+    $password = isset($_POST["pswd"]) ? trim($_POST["pswd"]) : '';
+    $userRole = isset($_POST["userRole"]) ? trim($_POST["userRole"]) : '';
 
     $errors = array();
 
-    if(empty($userName)) {
+    if (empty($userName)) {
         $errors[] = "Username is required!";
     }
-
-    if(empty($email)) {
+    if (empty($email)) {
         $errors[] = "Email is required!";
     }
-
-    if(empty($firstName)) {
-        $errors[] = "First name is required!";
-    }
-
-    if(empty($lastName)) {
-        $errors[] = "Last name is required!";
-    }
-
-    if(empty($password)) {
+    if (empty($password)) {
         $errors[] = "Password is required!";
     }
-
-    if(empty($userRole)) {
+    if (empty($userRole)) {
         $errors[] = "User role is required!";
     }
 
+    if (!empty($email) && !filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        $errors[] = "Invalid email format!";
+    }
 
-    if(empty($errors)) {
-        $checkSql = "SELECT userID FROM users WHERE userName = ? OR email = ?";
+    if (empty($errors)) {
+        $checkSql = "SELECT userId FROM Users WHERE userName = ? OR email = ?";
         $checkStmt = $conn->prepare($checkSql);
+
+        if (!$checkStmt) {
+            die("Prepare failed: " . $conn->error);
+        }
+
         $checkStmt->bind_param("ss", $userName, $email);
         $checkStmt->execute();
         $result = $checkStmt->get_result();
 
-        if($result->num_rows > 0) {
+        if ($result->num_rows > 0) {
             $errors[] = "Username or email already exists";
         }
-
         $checkStmt->close();
-
     }
 
-    if(empty($errors)) {
+    if (empty($errors)) {
         $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
 
-        $sql = "INSERT INTO users (userName, email, userPassword, userRole, createdAt) VALUES (?, ?, ?, ?, NOW())";
+        $sql = "INSERT INTO Users (userName, email, userPassword, phone, address, userRole, createdAt) VALUES (?, ?, ?, ?, ?, ?, NOW())";
         $stmt = $conn->prepare($sql);
 
-        if($stmt) {
-            $stmt->bind_param("ssss", $userName, $email, $hashedPassword, $userRole);
+        if ($stmt) {
+            $stmt->bind_param("ssssss", $userName, $email, $hashedPassword, $phone, $address, $userRole);
 
-            if($stmt->execute()) {
+            if ($stmt->execute()) {
                 echo "<script>
                     alert('User added successfully!');
                     window.location.href = 'userManage.html';
-                    </script>";
+                </script>";
                 exit();
             } else {
-                $errors[] = "Error adding user";
+                $errors[] = "Error adding user: " . $stmt->error;
             }
             $stmt->close();
         } else {
-            $errors[] = "Error with statement";
+            $errors[] = "Error preparing statement: " . $conn->error;
         }
     }
 
-    $conn->close();
+    if (!empty($errors)) {
+        echo "<script>";
+        foreach ($errors as $error) {
+            echo "alert('" . addslashes($error) . "');";
+        }
+        echo "window.history.back();";
+        echo "</script>";
+    }
 }
 
+$conn->close();
 ?>

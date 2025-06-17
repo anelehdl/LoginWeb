@@ -3,10 +3,10 @@ session_start();
 
 require_once 'Session/sessionCheck.php';
 
-$servername = "localhost";
-$username = "root";
-$password = 'Ad1$QL';
-$dbname = "marketplace";
+$servername = "sql211.infinityfree.com";
+$username = "if0_39214006";
+$password = 'Aneleh001';
+$dbname = "if0_39214006_marketplace";
 $port = 3306;
 
 
@@ -65,7 +65,7 @@ function handleGetRequest($conn)
         $searchTerm = '%' . $_GET['search'] . '%';
         $stmt = $conn->prepare("
             SELECT productID, productName, productDescription, price, category, stock 
-            FROM products 
+            FROM Products 
             WHERE userID = ? AND (
                 productName LIKE ? OR 
                 category LIKE ? OR 
@@ -77,7 +77,7 @@ function handleGetRequest($conn)
     } else {
         $stmt = $conn->prepare("
             SELECT productID, productName, productDescription, price, category, stock 
-            FROM products 
+            FROM Products 
             WHERE userID = ? 
             ORDER BY productName
         ");
@@ -92,7 +92,7 @@ function handleGetRequest($conn)
         $products[] = $row;
     }
 
-    echo json_encode(['products' => $products]);
+    echo json_encode(['Products' => $products]);
 }
 
 function handlePostRequest($conn)
@@ -118,7 +118,7 @@ function handlePostRequest($conn)
     $category = $input['category'];
     $stock = intval($input['stock']);
 
-    $checkStmt = $conn->prepare("SELECT userID FROM products WHERE productID = ?");
+    $checkStmt = $conn->prepare("SELECT userID FROM Products WHERE productID = ?");
     $checkStmt->bind_param("i", $productID);
     $checkStmt->execute();
     $checkResult = $checkStmt->get_result();
@@ -133,7 +133,7 @@ function handlePostRequest($conn)
     }
 
     $updateStmt = $conn->prepare("
-        UPDATE products 
+        UPDATE Products 
         SET productName = ?, productDescription = ?, price = ?, category = ?, stock = ?
         WHERE productID = ? AND userID = ?
     ");

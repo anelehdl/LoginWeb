@@ -18,8 +18,14 @@
 
         <a href="../Homepage/homepage.html">Home</a>
         <a href="../Categories/categories.html">Categories</a>
-        <a href="../Account/account.html">My Account</a>
+        <a href="../Account/buyerAccount.html">My Account</a>
         <a href="../Helppage/help.html">Help</a>
+
+        <div class="cart">
+            <a href="../Transaction/cart.html">
+                <img src="../Pictures/cart.png" alt="Cart">
+            </a>
+        </div>
 
         <div class="headerB">
             <button id="headerLBtn">Login</button>
@@ -29,70 +35,69 @@
 
     <main>
         <div class="container">
-
             <div class="cat-header">
                 <h1>Categories</h1>
+                <p class="cat-subtitle">Discover amazing products in every category</p>
             </div>
 
-            <div class="cat-cards">
-                <div class="card">
+            <div class="search-container">
+                <span class="search-icon">&#128269;</span>
+                <input type="text" class="search-input" placeholder="Search categories..." id="searchInput">
+            </div>
+
+            <div class="cat-cards" id="categoriesGrid">
+                <div class="card" data-category="home">
                     <div class="card-icon">
-                        <img src="../Pictures/cat1home.png" alt="Icon">
+                        <span class="icon-emoji">&#127968;</span>
                     </div>
-                    <div class="card-title">
-                        Home
-                    </div>
-                    <a href="#" class="card-action">View</a>
+                    <div class="card-title">Home & Garden</div>
+                    <div class="card-description">Furniture, decor, and everything to make your house a home</div>
+                    <a href="#" class="card-action">Explore</a>
                 </div>
 
-                <div class="card">
+                <div class="card" data-category="beauty">
                     <div class="card-icon">
-                        <img src="../Pictures/cat2beauty.png" alt="Icon">
+                        <span class="icon-emoji">&#128132;</span>
                     </div>
-                    <div class="card-title">
-                        Beauty & Fashion
-                    </div>
-                    <a href="#" class="card-action">View</a>
+                    <div class="card-title">Beauty & Fashion</div>
+                    <div class="card-description">Latest trends in fashion, cosmetics, and personal care</div>
+                    <a href="#" class="card-action">Explore</a>
                 </div>
 
-                <div class="card">
+                <div class="card" data-category="babies">
                     <div class="card-icon">
-                        <img src="../Pictures/cat3babies.png" alt="Icon">
+                        <span class="icon-emoji">&#127868;</span>
                     </div>
-                    <div class="card-title">
-                        Babies
-                    </div>
-                    <a href="#" class="card-action">View</a>
+                    <div class="card-title">Baby & Kids</div>
+                    <div class="card-description">Everything for your little ones, from toys to essentials</div>
+                    <a href="#" class="card-action">Explore</a>
                 </div>
 
-                <div class="card">
+                <div class="card" data-category="sports">
                     <div class="card-icon">
-                        <img src="../Pictures/cat4sport.png" alt="Icon">
+                        <span class="icon-emoji">&#9917;</span>
                     </div>
-                    <div class="card-title">
-                        Sport & Leisure
-                    </div>
-                    <a href="#" class="card-action">View</a>
+                    <div class="card-title">Sport & Leisure</div>
+                    <div class="card-description">Equipment and gear for all your sporting adventures</div>
+                    <a href="#" class="card-action">Explore</a>
                 </div>
 
-                <div class="card">
+                <div class="card" data-category="pets">
                     <div class="card-icon">
-                        <img src="../Pictures/cat5pets.png" alt="Icon">
+                        <span class="icon-emoji">&#128062;</span>
                     </div>
-                    <div class="card-title">
-                        Pets
-                    </div>
-                    <a href="#" class="card-action">View</a>
+                    <div class="card-title">Pets</div>
+                    <div class="card-description">Care, toys, and accessories for your furry friends</div>
+                    <a href="#" class="card-action">Explore</a>
                 </div>
 
-                <div class="card">
+                <div class="card" data-category="other">
                     <div class="card-icon">
-                        <img src="../Pictures/cat6other.png" alt="Icon">
+                        <span class="icon-emoji">&#128230;</span>
                     </div>
-                    <div class="card-title">
-                        Other
-                    </div>
-                    <a href="#" class="card-action">View</a>
+                    <div class="card-title">Other</div>
+                    <div class="card-description">Unique finds and miscellaneous items worth discovering</div>
+                    <a href="#" class="card-action">Explore</a>
                 </div>
             </div>
         </div>

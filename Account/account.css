@@ -35,6 +35,20 @@ header a:hover {
     color: #1e3c6b;
 }
 
+.cart {
+    display: flex;
+    align-items: center;
+    border: none;
+    margin-right: 10px;
+    margin-left: 10px;
+}
+
+.cart img {
+    height: 30px;
+    max-width: 30px;
+    object-fit: contain;
+}
+
 .headerB {
     margin-left: auto;
     display: flex;

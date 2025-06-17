@@ -1,6 +1,4 @@
 <?php
-// Session/sessionCheck.php
-
 function startSession()
 {
     if (session_status() == PHP_SESSION_NONE) {
@@ -8,7 +6,6 @@ function startSession()
     }
 }
 
-// Generic session check - works for all user types
 function checkSession()
 {
     startSession();
@@ -19,7 +16,6 @@ function checkSession()
     }
 }
 
-// Specific check for sellers only
 function checkSellerSession()
 {
     startSession();
@@ -30,7 +26,6 @@ function checkSellerSession()
     }
 }
 
-// Specific check for buyers only
 function checkBuyerSession()
 {
     startSession();
@@ -41,7 +36,6 @@ function checkBuyerSession()
     }
 }
 
-// Specific check for admin only
 function checkAdminSession()
 {
     startSession();
@@ -52,7 +46,6 @@ function checkAdminSession()
     }
 }
 
-// Get user information functions
 function getUserId()
 {
     startSession();
@@ -71,7 +64,6 @@ function getUserRole()
     return $_SESSION['user_role'] ?? null;
 }
 
-// For sellers, the sellerId is the same as userId
 function getSellerId()
 {
     startSession();
@@ -89,7 +81,6 @@ function getSellerName()
     return ($_SESSION['user_role'] === 'seller') ? $_SESSION['user_name'] : null;
 }
 
-// Generic utility functions
 function isLoggedIn()
 {
     startSession();
@@ -112,15 +103,5 @@ function isAdmin()
 {
     startSession();
     return isset($_SESSION['user_role']) && $_SESSION['user_role'] === 'admin';
-}
-
-// Logout function
-function logout()
-{
-    startSession();
-    session_unset();
-    session_destroy();
-    header("Location: ../Login/login.html");
-    exit();
 }
 ?>

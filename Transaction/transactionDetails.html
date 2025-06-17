@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment</title>
+    <link rel="stylesheet" href="transact.css">
+    <script src="transact.js" defer></script>
+    <script src="../Login/login.js" defer></script>
+    <script src="../SignUp/signup.js" defer></script>
+</head>
+
+<body>
+    <header>
+        <div class="logo">
+            <img src="../Pictures/LogoPic.png" alt="Logo">
+        </div>
+
+        <a href="../Homepage/homepage.html">Home</a>
+        <a href="../Categories/categories.html">Categories</a>
+        <a href="../Account/buyerAccount.html">My Account</a>
+        <a href="../Helppage/help.html">Help</a>
+
+        <div class="cart">
+            <a href="../Transaction/cart.html">
+                <img src="../Pictures/cart.png" alt="Cart">
+            </a>
+        </div>
+
+        <div class="headerB">
+            <button id="headerLBtn">Login</button>
+            <button id="headerSBtn">Sign up</button>
+        </div>
+    </header>
+
+    <main>
+        <div class="container">
+            <div class="checkout-header">
+                <h1>Complete Your Purchase</h1>
+                <div class="progress-bar">
+                    <div class="progress-step completed">Cart</div>
+                    <div class="progress-step active">Payment</div>
+                    <div class="progress-step">Confirmation</div>
+                </div>
+            </div>
+
+            <div class="checkout-content">
+                <div class="order-summary">
+                    <h2>Order Summary</h2>
+                    <div id="orderItems"></div>
+                    <div class="summary-totals">
+                        <div class="summary-row">
+                            <span>Subtotal:</span>
+                            <span id="summarySubtotal">R0.00</span>
+                        </div>
+                        <div class="summary-row">
+                            <span>Tax (15%):</span>
+                            <span id="summaryTax">R0.00</span>
+                        </div>
+                        <div class="summary-row total">
+                            <span>Total:</span>
+                            <span id="summaryTotal">R0.00</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="payment-section">
+                    <h2>Payment Information</h2>
+                    <form id="paymentForm" class="payment-form">
+                        <div class="form-section">
+                            <h3>Billing Information</h3>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="firstName">First Name *</label>
+                                    <input type="text" id="firstName" name="firstName" required>
+                                    <div class="error-message" id="firstNameError"></div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="lastName">Last Name *</label>
+                                    <input type="text" id="lastName" name="lastName" required>
+                                    <div class="error-message" id="lastNameError"></div>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="email">Email Address *</label>
+                                <input type="email" id="email" name="email" required>
+                                <div class="error-message" id="emailError"></div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="address">Street Address *</label>
+                                <input type="text" id="address" name="address" required>
+                                <div class="error-message" id="addressError"></div>
+                            </div>
+
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="city">City *</label>
+                                    <input type="text" id="city" name="city" required>
+                                    <div class="error-message" id="cityError"></div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="zipCode">Postal Code *</label>
+                                    <input type="text" id="zipCode" name="zipCode" required>
+                                    <div class="error-message" id="zipCodeError"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Credit Card Information -->
+                        <div class="form-section">
+                            <h3>Credit Card Information</h3>
+                            <div class="form-group">
+                                <label for="cardNumber">Card Number *</label>
+                                <input type="text" id="cardNumber" name="cardNumber" placeholder="1234 5678 9012 3456"
+                                    maxlength="19" required>
+                                <div class="error-message" id="cardNumberError"></div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="cardName">Name on Card *</label>
+                                <input type="text" id="cardName" name="cardName" required>
+                                <div class="error-message" id="cardNameError"></div>
+                            </div>
+
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="expiryDate">Expiry Date *</label>
+                                    <input type="text" id="expiryDate" name="expiryDate" placeholder="MM/YY"
+                                        maxlength="5" required>
+                                    <div class="error-message" id="expiryDateError"></div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="cvv">CVV *</label>
+                                    <input type="text" id="cvv" name="cvv" placeholder="123" maxlength="4" required>
+                                    <div class="error-message" id="cvvError"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-actions">
+                            <button type="button" class="btn-secondary"
+                                onclick="window.location.href='../Transaction/cart.html'">
+                                Back to Cart
+                            </button>
+                            <button type="submit" class="btn-primary" id="submitPayment">
+                                Complete Purchase
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <div id="successModal" class="modal">
+        <div class="modal-content">
+            <div class="success-icon">✓</div>
+            <h2>Payment Successful!</h2>
+            <p>Thank you for your purchase. Your order has been confirmed.</p>
+            <div class="order-details">
+                <p><strong>Order Total:</strong> <span id="finalTotal">R0.00</span></p>
+                <p><strong>Order ID:</strong> <span id="orderId"></span></p>
+            </div>
+            <div class="modal-actions">
+                <button class="btn-primary" onclick="goToHomepage()">Continue Shopping</button>
+                <button class="btn-secondary" onclick="printReceipt()">Print Receipt</button>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

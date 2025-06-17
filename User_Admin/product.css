@@ -100,10 +100,3 @@ hr {
     color: #666;
     line-height: 1.6;
 }
-
-
-@media (max-width: 1024px) {
-    .options-grid {
-        grid-template-columns: repeat(2, 1fr);
-    }
-}

@@ -28,12 +28,22 @@
                 <div class="txt">
                     <h2>LOGIN</h2>
 
-                    <input type="text" name="userName" id="userName" placeholder="Username">
+                    <div id="messageContainer"></div>
 
-                    <input type="password" name="pswd" id="pswd" placeholder="Password">
+                    <div class="input-container">
+                        <input type="text" name="userName" id="userName" placeholder=" " required>
+                        <label for="userName">Username</label>
+                    </div>
 
-                    <input type="submit" value="Login">
+                    <div class="input-container">
+                        <input type="password" name="pswd" id="pswd" placeholder=" " required>
+                        <label for="pswd">Password</label>
+                    </div>
+
+                    <input type="submit" value="Login" id="loginBtn">
+
                     <p>Don't have an account?</p>
+
                     <input type="button" name="signup" id="signup" value="Sign up">
                 </div>
             </form>

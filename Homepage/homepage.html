@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Homepage</title>
     <link rel="stylesheet" href="homepage.css">
+    <script src="../Homepage/homepage.js" defer></script>
     <script src="../Login/login.js" defer></script>
     <script src="../SignUp/signup.js" defer></script>
 </head>
@@ -16,10 +17,16 @@
             <img src="../Pictures/LogoPic.png" alt="Logo">
         </div>
 
-        <a href="../Homepage/homepage.html">Home</a>
+        <a href="../Homepage/homepage.html" class="active">Home</a>
         <a href="../Categories/categories.html">Categories</a>
         <a href="../Account/buyerAccount.html">My Account</a>
         <a href="../Helppage/help.html">Help</a>
+
+        <div class="cart">
+            <a href="../Transaction/cart.html">
+                <img src="../Pictures/cart.png" alt="Cart">
+            </a>
+        </div>
 
         <div class="headerB">
             <button id="headerLBtn">Login</button>
@@ -30,96 +37,97 @@
     <main>
         <div class="container">
             <div class="welcome">
-                <h1>Home Page</h1>
-                <p>Welcome to customer website home page</p>
+                <h1>Welcome to Local Market</h1>
+                <p>Discover amazing products from local sellers in your community</p>
+            </div>
+
+            <div class="search-container">
+                <span class="search-icon">&#128269;</span>
+                <input type="text" class="search-input" placeholder="Search products..." id="searchInput">
             </div>
 
             <div class="navigation">
-                <a href="#" class="tab">Product Listing</a>
+                <a href="../Products/productListings.html" class="tab active">Product Listing</a>
                 <a href="#" class="tab">Reviews</a>
                 <a href="#" class="tab">Messages</a>
             </div>
 
-            <div class="products">
-                <div class="productCards">
+            <div class="products" id="productsGrid">
+                <div class="productCards" data-category="stationary">
                     <div class="prodImg">
-                        <img src="../Pictures/prod1.png" alt="prod1" class="prodImage">
+                        <span class="product-icon">&#128221;</span>
                     </div>
                     <div class="prodInfo">
                         <span class="category">Stationary</span>
-                        <h3 class="itemTitle">Pencils</h3>
-                        <p class="description">An instrument for writing or drawing, consisting of a thin stick of
-                            graphite or a similar substance enclosed in a long thin piece of wood or fixed in a
-                            cylindrical case.</p>
-                        <a href="#" class="read">Read More</a>
+                        <h3 class="itemTitle">Premium Pencils</h3>
+                        <p class="description">High-quality graphite pencils perfect for writing, drawing, and
+                            sketching. Durable wood construction with smooth graphite core.</p>
+                        <a href="#" class="read">Learn More</a>
                     </div>
                 </div>
 
-                <div class="productCards">
+                <div class="productCards" data-category="kitchen">
                     <div class="prodImg">
-                        <img src="../Pictures/prod2.png" alt="prod2" class="prodImage">
+                        <span class="product-icon">&#129348;</span>
                     </div>
                     <div class="prodInfo">
                         <span class="category">Kitchen</span>
-                        <h3 class="itemTitle">Utensils</h3>
-                        <p class="description">A device having holes punched in it or made of crossed wires for
-                            separating solid matter from a liquid.</p>
-                        <a href="#" class="read">Read More</a>
+                        <h3 class="itemTitle">Kitchen Utensils</h3>
+                        <p class="description">Complete set of essential kitchen utensils including strainers, ladles,
+                            and serving spoons made from durable materials.</p>
+                        <a href="#" class="read">Learn More</a>
                     </div>
                 </div>
 
-                <div class="productCards">
+                <div class="productCards" data-category="kitchen">
                     <div class="prodImg">
-                        <img src="../Pictures/prod3.png" alt="prod3" class="prodImage">
+                        <span class="product-icon">&#127860;</span>
                     </div>
                     <div class="prodInfo">
                         <span class="category">Kitchen</span>
-                        <h3 class="itemTitle">Cutlery</h3>
-                        <p class="description">Knives, forks, and spoons used for eating or serving food.</p>
-                        <a href="#" class="read">Read More</a>
+                        <h3 class="itemTitle">Elegant Cutlery</h3>
+                        <p class="description">Beautiful stainless steel cutlery set including knives, forks, and
+                            spoons. Perfect for everyday dining and special occasions.</p>
+                        <a href="#" class="read">Learn More</a>
                     </div>
                 </div>
 
-                <!--Second row-->
-                <div class="productCards">
+                <div class="productCards" data-category="fashion">
                     <div class="prodImg">
-                        <img src="../Pictures/prod4.png" alt="prod4" class="prodImage">
+                        <span class="product-icon">&#128095;</span>
                     </div>
                     <div class="prodInfo">
-                        <span class="category">Stationary</span>
-                        <h3 class="itemTitle">Sharpeners</h3>
-                        <p class="description">A device for sharpening a pencil by rotating it against a cutting edge.
-                        </p>
-                        <a href="#" class="read">Read More</a>
+                        <span class="category">Beauty & Fashion</span>
+                        <h3 class="itemTitle">High Heels</h3>
+                        <p class="description">Stylish 4inch heels, suitable for everyday wear or office attire.</p>
+                        <a href="#" class="read">Learn More</a>
                     </div>
                 </div>
 
-                <div class="productCards">
+                <div class="productCards" data-category="kitchen">
                     <div class="prodImg">
-                        <img src="../Pictures/prod5.png" alt="prod5" class="prodImage">
+                        <span class="product-icon">&#129473;</span>
                     </div>
                     <div class="prodInfo">
                         <span class="category">Kitchen</span>
-                        <h3 class="itemTitle">Displays</h3>
-                        <p class="description">A tiered display designed to hold cupcakes or other similarly-sized
-                            bakery items</p>
-                        <a href="#" class="read">Read More</a>
+                        <h3 class="itemTitle">Cupcake Displays</h3>
+                        <p class="description">Multi-tiered display stands perfect for showcasing cupcakes, pastries,
+                            and other baked goods at parties and events.</p>
+                        <a href="#" class="read">Learn More</a>
                     </div>
                 </div>
 
-                <div class="productCards">
+                <div class="productCards" data-category="Babies">
                     <div class="prodImg">
-                        <img src="../Pictures/prod6.png" alt="prod6" class="prodImage">
+                        <span class="product-icon">&#129528;</span>
                     </div>
                     <div class="prodInfo">
-                        <span class="category">Stationary</span>
-                        <h3 class="itemTitle">Highlighters</h3>
-                        <p class="description">A broad marker pen used to overlay transparent fluorescent colour on text
-                            or a part of an illustration.</p>
-                        <a href="#" class="read">Read More</a>
+                        <span class="category">Babies & Kids</span>
+                        <h3 class="itemTitle">Toys</h3>
+                        <p class="description">Big brown bear, the perfect companion for children.</p>
+                        <a href="#" class="read">Learn More</a>
                     </div>
                 </div>
-
             </div>
         </div>
     </main>

@@ -99,16 +99,3 @@ h1 {
     color: #666;
     line-height: 1.6;
 }
-
-@media (max-width: 770px) {
-    main {
-        flex-direction: column;
-        gap: 40px;
-        padding: 40px 20px;
-    }
-
-    .left-section {
-        max-width: none;
-    }
-
-}
